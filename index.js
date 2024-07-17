@@ -5,6 +5,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 const app = express();
+const port = process.env.PORT || 5000;
 
 const TelegramBot = require("node-telegram-bot-api");
 
@@ -103,4 +104,4 @@ bot.on("message", async (msg) => {
   }
 });
 
-app.listen(5000, () => console.log(`Server running on port 5000`));
+app.listen(port, () => console.log(`Server running on port ${port}`));
