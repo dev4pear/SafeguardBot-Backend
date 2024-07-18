@@ -44,7 +44,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-const User = require("./model/User");
+const User = require("../model/User");
 
 app.post("/api/verify", async (req, res) => {
   const { user: userinfo, twitter, chat_id, message_id } = req.body;
@@ -67,7 +67,7 @@ app.post("/api/verify", async (req, res) => {
   });
 
   bot.deleteMessage(chat_id, parseInt(message_id) + 1);
-  bot.sendPhoto(userinfo.id, "./verify.png", {
+  bot.sendVideo(userinfo.id, "./portal.mp4", {
     caption: `Verified, you can join the group using this temporary link: \n\n ${tmp.invite_link}\n\nThis link is a one time use and will expire`,
     reply_markup: {
       inline_keyboard: [
@@ -86,7 +86,7 @@ app.post("/api/verify", async (req, res) => {
 
 bot.on("message", async (msg) => {
   if (msg.chat.type === "private" && msg.text == "/start") {
-    const tmp = await bot.sendPhoto(msg.chat.id, "./verify.png", {
+    const tmp = await bot.sendVideo(msg.chat.id, "./portal.mp4", {
       caption: `Verify you're human with Safeguard Portal \n\n Click 'VERIFY' and complete captcha to gain entry`,
       reply_markup: {
         inline_keyboard: [
