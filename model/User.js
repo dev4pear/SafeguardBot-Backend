@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     type: Object,
   },
   twitter: {
-    required: true,
+    required: false,
     type: String,
   },
 });
