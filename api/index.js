@@ -49,16 +49,21 @@ const User = require("../model/User");
 app.post("/api/verify", async (req, res) => {
   const { user: userinfo, twitter, chat_id, message_id } = req.body;
   let user = await User.findOne({ userinfo });
+  console.log("***", userinfo, twitter);
   if (user) {
     console.log("This Telegram user is already registered");
     return res
       .status(500)
       .json({ message: "Telegram User already registered" });
   }
-  user = await User.findOne({ twitter });
-  if (user) {
-    console.log("This Twitter user is already registered");
-    return res.status(500).json({ message: "Twitter User already registered" });
+  if (twitter !== "") {
+    user = await User.findOne({ twitter });
+    if (user) {
+      console.log("This Twitter user is already registered");
+      return res
+        .status(500)
+        .json({ message: "Twitter User already registered" });
+    }
   }
   const newUser = new User({ userinfo, twitter });
   await newUser.save();
