@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
   userinfo: {
@@ -7,7 +8,18 @@ const userSchema = new mongoose.Schema({
   twitter: {
     required: false,
     type: String,
+    default: "",
+  },
+  prevPoint: {
+    required: false,
+    type: Number,
+    default: 0,
+  },
+  point: {
+    required: false,
+    type: Number,
+    default: 0,
   },
 });
 
-module.exports = mongoose.model("User", userSchema);
+export const User = mongoose.model("User", userSchema);
